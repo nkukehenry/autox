@@ -8,36 +8,26 @@ class Product extends CI_Controller
     {
         parent::__construct();
         $this->load->model('products');
+        $this->load->model('adminmodel');
     }
 
-    public function index($pid){
-
-        //$pid = $this->uri->segment(3);
+    public function index($pid){;
      
-        $productDetail['productDetail'] = $this->products->getProductByID($pid);
+        $data['product'] = $this->adminmodel->get_product($pid);
 
-        if (!empty($productDetail['productDetail'])) {
+        $this->load->view('main/header');
+        $this->load->view('pages/product', $data);
 
-            $gender =  $productDetail['productDetail'][0]['gender']; //returns the gender so that we can display the trending products.
 
-            $this->load->view('main/header');
-            $this->load->view('pages/product', $productDetail);
+        $data['products'] = $this->products->allproducts();
 
-            // if($gender == 'women'){
-            //     $this->load->view('pages/trending-women');
-            // }else{
-            //     $this->load->view('pages/trending-men');
-            // }
+        $this->load->view('pages/related',$data);
 
-            $data['products'] = $this->products->allproducts();
-
-            $this->load->view('pages/related',$data);
-
-            $this->load->view('main/footer');
-        }
+        $this->load->view('main/footer');
 
     }
 
 
 
 }
+

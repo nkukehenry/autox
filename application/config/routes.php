@@ -55,5 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['category/(:any)/(:any)'] = 'category/index/$gender/$category';
 $route['product/(:any)'] = 'product/index/$1';
 $route['admin/dashboard'] = "admin/productlist";
+$route['admin/login'] = "admin/login";
 $route['contact'] = 'shop/contact';
 $route['products'] = 'shop/index';

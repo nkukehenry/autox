@@ -10,6 +10,9 @@ if(!defined('BASEPATH'))
             parent::__construct();
 
             $this->db = $this->load->database('default', true);
+            $this->products_table = "product";
+            $this->products_images_table ="product_images";
+            $this->products_categories_table = "categories";
         }
 ////////////////////////////////--------------------------------------Admins------------------------------/////////////////////////////////
 
@@ -18,7 +21,7 @@ if(!defined('BASEPATH'))
             $this->db->from('admin');
             $this->db->where('admin_email',$admin_email);
             $this->db->where('admin_password',$admin_password);
-            $checkDetail =  $this->db->get()->result_array();
+            $checkDetail =  $this->db->get()->row();
             return $checkDetail;
         }
        
@@ -43,8 +46,14 @@ if(!defined('BASEPATH'))
         public function getProducts(){
             $this->db->select('*');
             $this->db->from('product');
-            $checkDetail =  $this->db->get()->result_array();
-            return $checkDetail;
+            $products =  $this->db->get()->result();
+
+            foreach ($products as $product) {
+                $product->images   = $this->get_images($product->pid);
+                $product->category = $this->get_category($product->category);
+            }
+
+            return $products;
         }
 
         public function deleteProduct($id){
@@ -53,8 +62,52 @@ if(!defined('BASEPATH'))
 
         }
 
+         public function get_category($id){
+
+            $this->db->where('id',$id);
+            return $this->db->get($this->products_categories_table)->row();
+        }
+
+        public function get_images($id){
+
+            $this->db->where('product_id',$id);
+            return $this->db->get($this->products_images_table)->result();
+        }
+
+        public function get_product($id){
+
+            $this->db->where('pid',$id);
+            $product = $this->db->get($this->products_table)->row();
+            
+            if($product){
+
+                $product->images   = $this->get_images($id);
+                $product->category = $this->get_category($product->category);
+            }
+
+            return $product;
+        }
+
+
+
         public function insertProduct($data){
-            $this->db->insert('product', $data);
+
+           if(isset($data['pid'])){
+
+                $this->db->where('pid',$data['id']);
+                $this->db->update($this->products_table,$data);
+
+            }else{
+                $this->db->insert($this->products_table,$data);
+            }
+
+            $row_id = (isset($data['pid']))?$data['pid']:$this->db->insert_id();
+
+            return $this->get_product($row_id);
+        }
+
+        public function save_image($data){
+            $this->db->insert($this->products_images_table,$data);
         }
 
     }

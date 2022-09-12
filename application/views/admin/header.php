@@ -1,4 +1,12 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
+$data = $this->session->userdata();
+
+if(!isset($data['admin_email']))
+    redirect('admin/');
+
+?>
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
         <a class="navbar-brand text-left" href="#">Hello, Admin</a>

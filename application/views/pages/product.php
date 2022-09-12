@@ -1,18 +1,16 @@
 <?php
 
-foreach ($productDetail as $product) {
 
-
-  $size = $product['size'];
+  $size = $product->size;
   $sizeArr = explode(',', $size);
 
   ?>
-  <section class="mt-8 mb-5" style="margin-top: 180px;">
+  <section class="mt-8" style="margin-top: 180px;">
     <div class="container">
       <ol class="breadcrumb justify-content-center">
         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
-        <li class="breadcrumb-item"><a href="<?php echo base_url() . 'category/' . $product['gender'] . '/' . $product['category']; ?>"><?php echo ucfirst($product['category']); ?></a></li>
-        <li class="breadcrumb-item active"><?php echo $product['pname']; ?></li>
+        <li class="breadcrumb-item"><a><?php echo ucfirst($product->category->category_name); ?></a></li>
+        <li class="breadcrumb-item active"><?php echo $product->pname; ?></li>
       </ol>
     </div>
     </div>
@@ -26,41 +24,54 @@ foreach ($productDetail as $product) {
 
           <div class="owl-carousel product-detail-slider owl-theme mb-5">
             <!-- product -->
+            <?php foreach ($product->images as $key => $row): ?>
+              
             <div class="item">
               <div class="product-detail-image">
-                <img src="<?php echo base_url() . 'assets/img/' . $product['pimage']; ?>" class="pimage img-fluid">
+                <img src="<?php echo base_url() . 'assets/img/products/' . $row->image; ?>" class="pimage img-fluid">
+              </div>
+            </div>
+
+          <?php endforeach; ?>
+
+            <!-- <div class="item">
+              <div class="product-detail-image">
+                <img src="<?php echo base_url() . 'assets/img/products/' . $product->pimage; ?>" class="pimage img-fluid">
               </div>
             </div>
 
             <div class="item">
               <div class="product-detail-image">
-                <img src="<?php echo base_url() . 'assets/img/' . $product['pimage']; ?>" class="pimage img-fluid">
+                <img src="<?php echo base_url() . 'assets/img/products/' . $product->pimage; ?>" class="pimage img-fluid">
               </div>
-            </div>
-
-            <div class="item">
-              <div class="product-detail-image">
-                <img src="<?php echo base_url() . 'assets/img/' . $product['pimage']; ?>" class="pimage img-fluid">
-              </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-lg-6">
           <div>
             <!--  product Name -->
-            <p class="h3 workFont"><?php echo ucfirst($product['category']) . " " . $product['pname']; ?></p>
+            <p class="h3 workFont"><?php echo $product->pname; ?></p>
           </div>
           <div class="mt-4 mb-3">
             <!--  product Price -->
-            <h1>UGX 
-              <?php echo number_format($product['price']); ?></h1>
+            <h1>
+              <?php if($product->price>0): ?>
+                  UGX <?php echo number_format($product->price); ?>
+              <?php else: ?>
+                CALL TO ORDER
+              <?php endif; ?>
+            </h1>
+
+            <?php if($product->discount>0): ?>
             <p id="discount-display">
-              <span class="text-success font-weight-bold h3">52% OFF</span></p>
+              <span class="text-success font-weight-bold h3"><?php echo $product->discount; ?>% OFF</span></p>
             <p class="workFont text-muted">Inclusive of all taxes.</p>
+            <?php endif; ?>
 
           </div>
           <!--  product Size -->
-          <form action="<?php echo base_url() . 'shopping/checkCart/'; ?>" method="POST" id="selectSize">
+          <form>
+            <?php /*
             <div class="row">
               <div class="col-sm-12 col-lg-12 detail-option mt-3">
                 <h5 class="detail-option-heading">Size</h5>
@@ -89,14 +100,15 @@ foreach ($productDetail as $product) {
                   XS
                   <input type="radio" name="size" value="xs" id="xs" required class="input-invisible">
                 </label>
-                <input type="hidden" name="pid" value="<?php echo $product['pid']; ?>" id="pid">
-                <input type="hidden" name="price" value="<?php echo $product['price']; ?>" id="price">
+                <input type="hidden" name="pid" value="<?php echo $product->pid; ?>" id="pid">
+                <input type="hidden" name="price" value="<?php echo $product->price; ?>" id="price">
 
-                <a href="#">
+                
+                <!-- <div class="mt-4">
+                  <a href="#">
                   <p class="workFont text-muted mt-2">Size Guide</p>
                 </a>
 
-                <!-- <div class="mt-4">
                   <h6 class="font-weight-light">Check COD Availability</h6>
                   <label for="pincode">
                     <input type="number" class="form-control mt-2" placeholder="Enter Pincode" name ="pincode" id="pincode" minlength="6" maxlength="6">
@@ -108,6 +120,8 @@ foreach ($productDetail as $product) {
               </div>
             </div>
 
+            */ ?>
+
             <div>
               <a href="tel:+256705596470"  class="btn btn-lg btn-outline-dark text-uppercase mt-5" id="addToCart"><i class="fa fa-call mr-2"></i>Call Us +256705596470</a>
             </div>
@@ -118,11 +132,6 @@ foreach ($productDetail as $product) {
     </div>
     </div>
   </section>
-<?php
-}
-
-
-?>
 
 
 

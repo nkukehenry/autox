@@ -7,6 +7,11 @@
                         <h4 class="title">Add Product</h4>
                     </div>
                     <div class="content">
+
+
+                        <?php include 'includes/product_import.php' ?>
+
+
                         <form enctype="multipart/form-data" method="post" action="<?php echo base_url('admin/insertProduct'); ?>">
                             <div class="row">
                                 <div class="col-md-12">
@@ -31,17 +36,17 @@
                                     <div class="form-group">
                                         <label for="category">Category</label>
                                         <select class="form-control" name="category" required>
-                                            <option value="ethnic">Ethnic</option>
-                                            <option value="formal">Formal</option>
-                                            <option value="western">Western</option>
-                                            <option value="winter">Winter</option>
+                                            <?php foreach ($categorie as $category): ?>
+                                            <option value="<?=$category->id?>"><?php echo $category->category_name; ?></option>
+                                            <?php endforeach; ?>
+                                            
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 hidden">
                                     <div class="form-group">
                                         <label for="subcategory">Subcategory</label>
-                                        <input type="text" class="form-control" placeholder="Sub-Category like Jeans, Shirt " required name="subcategory">
+                                        <input type="hidden" class="form-control" placeholder="Sub-Category like Jeans, Shirt " required name="subcategory">
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +66,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" hidden>
                                 <div class="col-md-6">
                                     <div class="form-check-inline">
                                         <label class=" form-check-inline">Size: </label>
@@ -75,7 +80,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 hidden">
                                     <div class="form-group">
                                         <label>Color</label>
                                         <input type="text" class="form-control" placeholder="Enter Color's Hex Code" required name="color">

@@ -13,7 +13,7 @@ class Shop extends CI_Controller {
 	{
 		$data['products'] = $this->products->allproducts();
 		$this->load->view('main/header');
-		$this->load->view('pages/trending-men',$data);
+		$this->load->view('pages/products',$data);
 		$this->load->view('pages/men');
 		$this->load->view('main/footer');
 	}

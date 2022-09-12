@@ -10,6 +10,9 @@ if(!defined('BASEPATH'))
             parent::__construct();
 
             $this->db = $this->load->database('default', true);
+            $this->products_table = "product";
+            $this->products_images_table ="product_images";
+            $this->products_categories_table = "categories";
 
         }
 
@@ -26,11 +29,15 @@ if(!defined('BASEPATH'))
 
         function allproducts($gender=null){
 
-            $this->db->select("*");
+            $this->db->select('*');
             $this->db->from('product');
-           //$this->db->where('gender', $gender);
-            $productList = $this->db->get()->result_array();
-            return $productList;
+            $products =  $this->db->get()->result();
+
+            foreach ($products as $product) {
+                $product->images   = $this->get_images($product->pid);
+                $product->category = $this->get_category($product->category);
+            }
+            return $products;
         
         }
 
@@ -104,4 +111,35 @@ if(!defined('BASEPATH'))
             $this->db->where('size', $size);
             $this->db->delete('cart');
         }
+
+        //fresh onew
+
+          public function get_category($id){
+
+            $this->db->where('id',$id);
+            return $this->db->get($this->products_categories_table)->row();
+        }
+
+        public function get_images($id){
+
+            $this->db->where('product_id',$id);
+            return $this->db->get($this->products_images_table)->result();
+        }
+
+        public function get_product($id){
+
+            $this->db->where('pid',$id);
+            $product = $this->db->get($this->products_table)->row();
+            
+            if($product){
+
+                $product->images   = $this->get_images($id);
+                $product->category = $this->get_category($product->category);
+            }
+
+            return $product;
+        }
+
+
+
     }

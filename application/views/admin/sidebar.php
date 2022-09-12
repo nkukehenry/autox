@@ -1,12 +1,8 @@
-<!-- <?php 
+ <?php 
 
 $session_data = $this->session->userdata();
 
-if(!empty($session_data)){
-    print_r($session_data);
-}
- ?> -->
-
+ ?>
 
 <!doctype html>
 <html lang="en">

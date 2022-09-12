@@ -42,7 +42,7 @@
             <div class="row w-100">
                 <div class="col-lg-4 mx-auto">
                     <div class="auto-form-wrapper">
-                        <form action="<?php echo base_url('admin/dashboard'); ?>" method="post">
+                        <form action="<?php echo base_url('admin/login'); ?>" method="post">
                             <div class="text-center mb-3">
 
                                 <img src="<?php echo base_url(); ?>assets/img/logo.jpeg" width="90px">

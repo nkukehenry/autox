@@ -1185,4 +1185,14 @@ a.btn.text-muted:hover {
 .bg-purple {
   background-color: #b42b96;
 }
+
+.product-bg{
+  min-height: 200px;
+   max-height: 200px;
+  background-position: center;
+   background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
 /*# sourceMappingURL=creative.css.map */

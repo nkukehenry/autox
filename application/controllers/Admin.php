@@ -30,49 +30,52 @@ class Admin extends CI_Controller
         $this->load->view('admin/footer');
     }
 
-    public function dashboard()
+    public function login()
     {
 
-        // if($this->input->post('admin_login')){
-        if ($this->session->userdata('admin_email')) {
+        if(isset($_SESSION['admin_email'])) {
 
-            $this->sidebarHeader();
-            $this->load->view('admin/dashboard');
-            $this->footer();
+            redirect('admin/dashboard','refresh');
         }
 
-        else{
+        else if($this->input->post('admin_email')){
+        
         $admin_name = $this->input->post('admin_email');
-        $admin_password = $this->input->post('admin_password');
+        $admin_password = md5($this->input->post('admin_password'));
 
         //  echo $admin_name. $admin_password;
-        $checkAdmin = $this->adminmodel->checkAdmin($admin_name, $admin_password);
+        $admin = $this->adminmodel->checkAdmin($admin_name, $admin_password);
 
         // print_r($checkAdmin);
-        if (!empty($checkAdmin)) {
+        if (isset($admin->admin_id)) {
 
             // echo "hello";
             $data = array();
 
-            foreach ($checkAdmin as $admin) {
-                $data['admin_id'] = $admin['admin_id'];
-                $data['admin_name'] = $admin['admin_name'];
-            }
-
+            $data['admin_id'] = $admin->admin_id;
+            $data['admin_name'] = $admin->admin_name;
             $data['admin_email'] = $admin_name;
 
             $this->session->set_userdata($data);
 
-            $this->sidebarHeader();
-            $this->load->view('admin/dashboard');
-            $this->footer();
+            redirect('admin/dashboard','refresh');
+
         } else {
 
             $message = array('message' => 'Oops! Something Went Wrong!');
             $this->session->set_flashdata("item", $message);
             redirect('admin/', 'refresh');
         }
-      }      
+      }
+      else{
+
+        print_r($this->input->post());
+        exit();
+
+        $this->session->set_flashdata("item", ['message'=>"Access Not allowed"]);
+        redirect('admin/', 'refresh');
+      }
+
     }
 
     public function manageAdmin()
@@ -128,8 +131,8 @@ class Admin extends CI_Controller
 
 
     public function productlist(){
-        $details['productDetails'] = $this->adminmodel->getProducts();
 
+        $details['products'] = $this->adminmodel->getProducts();
         $this->sidebarHeader();        
         $this->load->view('admin/productlist', $details);
         $this->footer();
@@ -150,7 +153,7 @@ class Admin extends CI_Controller
 
     public function insertProduct() //function that handles the backend of inert-product
     {
-        $data = array();
+         $data = array();
          $data['pname'] =  $this->input->post('productName');
          $data['gender'] =  $this->input->post('gender');
          $data['category'] =  $this->input->post('category');
@@ -198,6 +201,128 @@ class Admin extends CI_Controller
         $this->productlist();
     }
 
+
+public function importProducts(){
+
+  $config['upload_path']          = 'uploads';
+  $config['allowed_types']        = 'zip';
+  $config['max_size']             = 10000000;
+  $config['max_width']            = 10000000;
+  $config['max_height']           = 10000000;
+  $config['overwrite']      = TRUE;
+
+   $this->load->library('upload', $config);
+
+  if ( ! $this->upload->do_upload('zip'))
+ {
+         $error = array('error' => $this->upload->display_errors());
+
+         print_r($error);
+ }
+ else
+ {
+
+$upload = $this->upload->data();
+
+$zip_file = $upload['file_name'];
+
+$zip = new ZipArchive();
+
+$res = $zip->open('uploads/'.$zip_file);
+
+if ($res === TRUE) {
+
+  $zip->extractTo('uploads/pics/');
+  $zip->close();
+
+  $allFolders = glob('uploads/pics/*/*');
+  $products_arr=[];
+
+
+       $i = 0;
+
+       //for each extracted folder,
+       foreach ($allFolders as $key=>$innerFolder) {
+
+        $clean_path = str_replace("\\", " ", $innerFolder);
+
+        //read images from folder
+           $folderContents = glob("$clean_path/*");
+
+
+          //foreach read image
+           foreach ($folderContents as $key => $fullpath) {
+
+
+                $chucked_path = explode("/", $fullpath);
+                //uploads/pics//projectpcs/product_folder/image_name
+
+                $product_name = $chucked_path[3];
+               
+                if(strpos($product_name, "Auto") !==0){
+
+
+                        $chucked_path = explode("/", $fullpath);
+                        $image_name   = $chucked_path[4];
+
+                        $chunked_image = explode(".", $image_name); //image.png
+                        $new_image_name = str_replace(" ", "_", $chunked_image[0]).time().".".$chunked_image[1];
+
+                        copy($fullpath,"assets/img/products/".$new_image_name);
+
+                        $products_arr[$i]['images'][] = $new_image_name;
+                        //name not yet added?, add it
+                        if(!isset($products_arr[$i]['name']))
+                            $products_arr[$i]['name'] = $product_name;
+              }
+
+           }
+
+
+          $i++;
+
+    }
+
+
+      $products =  array_values($products_arr);
+
+      foreach($products as $product){
+
+      $import_product = (Object) $product;
+
+       $data = array();
+       $data['pname'] =  $import_product->name;
+       $data['category'] =  1;
+       $data['subcategory'] = 1;
+       $data['price'] =  0;
+       $data['discount'] =  0;
+       $data['color'] = 'N/A';
+
+       $new_product = $this->adminmodel->insertProduct($data);
+
+       foreach ($import_product->images as $key => $image) {
+
+         $image = array('product_id'=>$new_product->pid,"image"=>$image);
+         $this->adminmodel->save_image($image);
+
+       }
+
+     }
+
+      $message = count(array_values($products_arr))." products added";;
+
+    }else{
+
+         $message = "Couldn't finish the operation";
+    }
+
+    $this->session->set_flashdata('message',$message);
+    redirect('admin/productlist', 'refresh');
+
+}
+
+}
+
     public function manageorders(){
 
         $userOrders['orderList'] = $this->ordermodel->totalOrders();
@@ -209,7 +334,17 @@ class Admin extends CI_Controller
 
     public function logout()
     {
+        
+        $user_data = $this->session->all_userdata();
+
+        foreach ($user_data as $key => $value) {
+            if ($key != 'session_id' && $key != 'ip_address' && $key != 'user_agent' && $key != 'last_activity') {
+                $this->session->unset_userdata($key);
+            }
+        }
+
         $this->session->sess_destroy();
+
         redirect('admin/', 'refresh');
     }
 }

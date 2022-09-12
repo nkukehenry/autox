@@ -2,6 +2,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 $data = $this->session->userdata();
+
+
 ?>
 
 
@@ -12,10 +14,11 @@ $data = $this->session->userdata();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta name="title" content="AUTOXUG-Your trusted auto parts and accessories shopping center">
   <meta name="description" content="Choose from a variety of quality auto supplies ready to help you pimp that ride.">
   <link rel="icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/logo.png">
 
-  <title>AUTOUG-Your trusted auto parts and accessories shopping center</title>
+  <title>AUTOXUG-Your trusted auto parts and accessories shopping center</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/bootstrap.css'; ?>">
