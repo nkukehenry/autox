@@ -1,5 +1,5 @@
 
-<section class="my-4 py-20" style="margin-top: 120px!important;">
+<section class="my-4 py-20" style="margin-top: 120px!important;background-color: #eeeeee;">
   <div class="container">
     <div class="row">
     
@@ -14,7 +14,7 @@
      <!-- product -->
      <?php foreach ($products as $product): ?>
 
-     <div class="item col-md-3 col-lg-3  col-sm-6 col-xs-12">
+     <div class="item col-md-4 col-lg-3  col-sm-6 col-xs-12 box">
          <div class="product-image product-bg" style="background-image: url(<?php echo base_url() . 'assets/img/products/'. $product->images[0]->image; ?>);" >
          <div class="product-hover-overlay">
             <a href="#" class="product-hover-overlay-link"></a>

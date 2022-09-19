@@ -577,7 +577,8 @@ i:hover {
 
 .product-image {
   position: relative;
-  border-bottom: 2px solid #495057;
+  border-bottom: 1px solid #495057;
+  min-height: 300px!important;
 }
 
 .product-image:hover {
@@ -1193,6 +1194,13 @@ a.btn.text-muted:hover {
    background-size: contain;
     background-repeat: no-repeat;
 
+}
+
+.box{
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  background-clip:padding-box;
+  background-color: #ffffff;
 }
 
 /*# sourceMappingURL=creative.css.map */
