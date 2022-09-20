@@ -5,7 +5,7 @@
   $sizeArr = explode(',', $size);
 
   ?>
-  <section class="mt-8" style="margin-top: 180px;">
+  <section class="mt-8" style="margin-top: 180px;background-color: #f2f2f2;">
     <div class="container">
       <ol class="breadcrumb justify-content-center">
         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>

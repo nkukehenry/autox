@@ -15,9 +15,10 @@
      <?php foreach ($products as $product): ?>
 
      <div class="item col-md-4 col-lg-3  col-sm-6 col-xs-12 box">
+
          <div class="product-image product-bg" style="background-image: url(<?php echo base_url() . 'assets/img/products/'. $product->images[0]->image; ?>);" >
          <div class="product-hover-overlay">
-            <a href="#" class="product-hover-overlay-link"></a>
+            <a href="<?php echo base_url() ?>product/<?=$product->pid?>" class="product-hover-overlay-link"></a>
               <div class="product-hover-overlay-buttons">
                 <a href="<?php echo base_url() ?>product/<?=$product->pid?>" class="btn btn-outline-dark btn-buy"><i class="fa-search fa"></i>
                 <span>View</span></a>
@@ -26,8 +27,8 @@
         </div>
 
          <div class="py-2">
-            <p class="text-muted text-sm mb-1"><?=$product->pname?></p>
-            <h3 class="h6 text-uppercase mb-1"><a href="#" class="text-dark">+256706789876</a></h3>
+            <p class="text-bold text-lg mb-1"><?=$product->pname?></p>
+            <h3 class="h6 text-uppercase mb-1"><a href="tel:+256706789876" class="text-dark">+256706789876</a></h3>
             <span class="text-muted"> 
               <?php if($product->price>0): ?>
                   UGX <?php echo number_format($product->price); ?>
