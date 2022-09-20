@@ -68,7 +68,7 @@ $data = $this->session->userdata();
     </div>
 
     <!-- Nav bar -->
-    <nav class="navbar navbar-expand-lg navbar-light navbar-airy fixed-top py-lg-4 px-lg-5 text-uppercase mb-2" id="mainNav" data-toggle="affix" style="border-bottom: 2px orange solid;">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-airy fixed-top py-lg-2 px-lg-5 text-uppercase mb-2 bg-white" id="mainNav" data-toggle="affix" style="border-bottom: 2px orange solid;">
       <div class="container-fluid" id="main-navbar">
         <a class="navbar-brand" href="<?php echo base_url(); ?>">
           <img src="<?php echo base_url(); ?>assets/img/logo.png" width="90px">

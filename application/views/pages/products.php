@@ -1,5 +1,5 @@
 
-<section class="my-4 py-20" style="margin-top: 120px!important;background-color: #eeeeee;">
+<section class="my-4 py-20" style="margin-top: 120px!important;background-color: #f2f2f2;">
   <div class="container">
     <div class="row">
     
