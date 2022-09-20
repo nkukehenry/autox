@@ -60,7 +60,7 @@ $data = $this->session->userdata();
           <div class="col-lg-12">
             <ul class="list-inline mb-0">
               <li class="list-inline-item mr-2"><i class="fas fa-headset"></i> Call/Whatsapp +256756287319</li>
-              <li class="list-inline-item border-left px-3 d-none d-sm-inline">Save your time, judt gives a call or send a whatsapp.
+              <li class="list-inline-item border-left px-3 d-none d-sm-inline">Save your time, call or send a whatsapp.
             </ul>
           </div>
         </div>
