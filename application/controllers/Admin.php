@@ -205,7 +205,7 @@ class Admin extends CI_Controller
 
         $this->load->library('upload', $config);
 
-        if(count($files) > 0){
+        if($_FILES['image']['name'][0] !==""){
 
             for($i=0; $i<$images_count; $i++)
             {
