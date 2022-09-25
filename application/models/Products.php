@@ -22,6 +22,7 @@ if(!defined('BASEPATH'))
             $this->db->from('product');
             $this->db->where('gender', $gender);
             $this->db->where('category', $category);
+            $this->db->order_by('rank_no','asc');
             $categorizedList = $this->db->get()->result_array();
             return $categorizedList;
             
@@ -31,6 +32,7 @@ if(!defined('BASEPATH'))
 
             $this->db->select('*');
             $this->db->from('product');
+            $this->db->order_by('rank_no','asc');
             $products =  $this->db->get()->result();
 
             foreach ($products as $product) {

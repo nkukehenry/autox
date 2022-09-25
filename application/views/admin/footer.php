@@ -2,7 +2,7 @@
         <footer class="footer">
             <div class="container-fluid">
                  <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="<?php echo base_url();?>"> OwnCart</a>, An Ecommerce Solution
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="<?php echo base_url();?>"> AutoX UG</a>, An Ecommerce Solution
                 </p>
             </div>
         </footer>

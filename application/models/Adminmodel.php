@@ -110,4 +110,23 @@ if(!defined('BASEPATH'))
             $this->db->insert($this->products_images_table,$data);
         }
 
+         public function categories(){
+           return $this->db->get('categories')->result();
+         }
+
+         public function ranks(){
+            return $this->db->get('ranking')->result();
+         }
+
+         public function deleteImage($image_id){
+
+            $this->db->where('id',$image_id);
+            $image = $this->db->get($this->products_images_table)->row();
+
+            @unlink('assets/img/products/'.$image->image);
+
+            $this->db->where('id',$image_id);
+            $this->db->delete($this->products_images_table);
+         }
+
     }

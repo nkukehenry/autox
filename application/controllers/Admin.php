@@ -88,6 +88,7 @@ class Admin extends CI_Controller
     }
 
     public function addAdmin(){
+
         $data = array();
         $data['admin_name'] = $this->input->post('newAdminName');
         $data['admin_email'] = $this->input->post('newAdminEmail');
@@ -144,61 +145,93 @@ class Admin extends CI_Controller
         redirect('admin/productlist', 'refresh');
     }
 
+     public function deleteImage(){
+        $id = $this->input->get('id');
+        $pid = $this->input->get('pid');
+        $this->adminmodel->deleteImage($id);
+        redirect('admin/edit_product/'.$pid, 'refresh');
+    }
+
     public function productinsert(){
 
-        $this->sidebarHeader();        
-        $this->load->view('admin/insertproduct');
+        $this->sidebarHeader();  
+        $data['categories'] =   $this->adminmodel->categories();
+        $data['ranks'] =   $this->adminmodel->ranks();     
+        $this->load->view('admin/insertproduct',$data);
+        $this->footer();
+    }
+
+     public function edit_product($pid){
+
+        $this->sidebarHeader();  
+        $data['categories'] =   $this->adminmodel->categories();
+        $data['ranks'] =   $this->adminmodel->ranks();
+        $data['product'] =   $this->adminmodel->get_product($pid);     
+        $this->load->view('admin/edit_product',$data);
         $this->footer();
     }
 
     public function insertProduct() //function that handles the backend of inert-product
     {
          $data = array();
-         $data['pname'] =  $this->input->post('productName');
-         $data['gender'] =  $this->input->post('gender');
-         $data['category'] =  $this->input->post('category');
-         $data['subcategory'] =  $this->input->post('subcategory');
-         $data['price'] =  $this->input->post('price');
-         $data['discount'] =  $this->input->post('discount');
-         $size =  $this->input->post('size');
-         $data['color'] =  $this->input->post('color');
+         $data['pname']       =  $this->input->post('productName');
+         $data['rank_no']     =  $this->input->post('rank_no');
+         $data['category']    =  $this->input->post('category');
+        // $data['subcategory'] =  $this->input->post('subcategory');
+         $data['price']       =  $this->input->post('price');
+         $data['discount']    =  $this->input->post('discount');
+         $data['description'] =  $this->input->post('description');
+         $data['pid']         =  $this->input->post('pid');
+         //$size =  $this->input->post('size');
+        // $data['color'] =  $this->input->post('color');
 
-         $config['upload_path']          = 'assets/img/'.$data['gender'].'/'. $data['category'];
-         $config['allowed_types']        = 'gif|jpg|png|jpeg';
+         $config['upload_path']          = 'assets/img/products';
+         $config['allowed_types']        = 'gif|jpg|png|jpeg|webp';
          $config['max_size']             = 10000;
          $config['max_width']            = 10000;
          $config['max_height']           = 10000;
          $config['encrypt_name']			= TRUE;
          $config['remove_spaces']		= TRUE;
-          $config['overwrite']			= FALSE;
+         $config['overwrite']			= FALSE;
 
-         $this->load->library('upload', $config);
+       
+        $images_count = count($_FILES['image']['name']);
 
-         if ( ! $this->upload->do_upload('image'))
-         {
-                 $error = array('error' => $this->upload->display_errors());
+        $files = $_FILES;
 
-                 print_r($error);
-                 echo "<br>";
-                 echo $config['upload_path'];
-               //  $this->load->view('dashboard/student_profile', $error);
-         }
-         else
-         {
-                 $imagePath = $this->upload->data();
+        $product = $this->adminmodel->insertProduct($data);
 
-                //   print_r($imagePath); echo "<br>"; 
-                  $data['pimage'] = $data['gender'].'/'. $data['category'].'/'.$imagePath['file_name'];
-                //   $path = $data['file_name'];
+        //die(json_encode($product));
 
-               $data['size'] = implode(',', $size);
+        $this->load->library('upload', $config);
 
-         }
+        if($images_count > 0){
 
-        //  print_r($data);
-        $this->adminmodel->insertProduct($data);
+            for($i=0; $i<$images_count; $i++)
+            {
+                 
+                $_FILES['image']['name']    = $files['image']['name'][$i];
+                $_FILES['image']['type']    = $files['image']['type'][$i];
+                $_FILES['image']['tmp_name']= $files['image']['tmp_name'][$i];
+                $_FILES['image']['error']   = $files['image']['error'][$i];
+                $_FILES['image']['size']    = $files['image']['size'][$i];
 
-        $this->productlist();
+                 $config['file_name'] = time().$_FILES["image"]['name'];
+
+                 $this->upload->initialize($config);
+
+                 $this->upload->do_upload('image');
+                 $imageInfo = $this->upload->data();
+
+                 $row = ['image'=>$imageInfo['file_name'], "product_id"=>$product->pid];
+
+                 $this->adminmodel->save_image($row);
+            }
+        }
+
+        $message = "Product saved successfully";
+        $this->session->set_flashdata('message',$message);
+        redirect('admin/productlist', 'refresh');
     }
 
 
