@@ -15,6 +15,21 @@
                         <form enctype="multipart/form-data" method="post" action="<?php echo base_url('admin/save_settings'); ?>">
                         
                              <div class="row">
+
+                                <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input class="form-control" name="phone_number" value="<?php echo $settings->phone_number; ?>" ?>
+                                </div>
+                                </div>
+
+                                 <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" name="email" value="<?php echo $settings->email; ?>" ?>
+                                </div>
+                                </div>
+
                                 <div class="col-md-12">
                                  <div class="form-group">
                                     <label>Meta Title</label>

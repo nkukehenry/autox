@@ -89,7 +89,7 @@
 					<div class="pb-3">
 						<h6 class="text-uppercase letter-spacing-5">Call Us</h6>
                         <p class="text-muted">We provide prompt responses to your queries.</p>
-                        <p class="text-muted">Call us on <strong><a href='tel:+256756287319'>+256756287319</a></strong>.</p>
+                        <p class="text-muted">Call us on <strong><a href='tel:<?php echo settings()->phone_number; ?>'><?php echo settings()->phone_number; ?></a></strong>.</p>
 					</div>	
 				</div>
 				<div class="col-lg-4">
@@ -98,8 +98,8 @@
 					</div>
 					<div class="pb-3">
 						<h6 class="text-uppercase letter-spacing-5">Email Us</h6>
-                        <p class="text-muted">Please feel free to write an email to us or to use our electronic ticketing system.</p>
-                        <p class="text-muted"><strong><a href="mailto:support@autovug.com">support@autovug.com</a></strong></p>
+                        <p class="text-muted">Please feel free to write an email to us.</p>
+                        <p class="text-muted"><strong><a href="mailto:<?php echo settings()->email; ?>"><?php echo settings()->email; ?></a></strong></p>
 					</div>	
 				</div>
 			</div>
