@@ -98,7 +98,7 @@
 
                             </div>                             
                         
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Add Product</button>
+                            <button type="submit" class="btn btn-info btn-fill pull-right">Save Changes</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
