@@ -94,7 +94,7 @@ if(!defined('BASEPATH'))
 
            if(isset($data['pid'])){
 
-                $this->db->where('pid',$data['id']);
+                $this->db->where('pid',$data['pid']);
                 $this->db->update($this->products_table,$data);
 
             }else{
