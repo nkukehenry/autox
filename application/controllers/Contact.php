@@ -16,7 +16,7 @@ class Contact extends CI_Controller
 
     // if(isset($this->session->userID)){    
         $cnt_data = array();
-        date_default_timezone_set('Asia/Kolkata');// change according timezone
+        date_default_timezone_set('Afria/Kampala');// change according timezone
               $currentDate = date( 'd-m-Y', time() );
 
       $cnt_data['cnt_fname'] = $this->input->post('cnt_fname');
@@ -28,7 +28,7 @@ class Contact extends CI_Controller
       $message = array('message' => 'Thankyou! We will get back to you shortly!', 'class' => 'alert alert-success text-center text-success mb-3');
       $this->session->set_flashdata("item" , $message);
 
-      redirect('shop/contact', 'refresh');
+      redirect('contact', 'refresh');
         // } else{
             
         //     $message = array('message' => 'Please Login to send a message', 'class' => 'alert alert-success');

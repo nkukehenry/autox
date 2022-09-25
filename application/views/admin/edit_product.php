@@ -92,7 +92,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Upload More Images</label>
-                                        <input type="file" class="form-control" required name="image[]" multiple="multiple">
+                                        <input type="file" class="form-control" name="image[]" multiple="multiple">
                                     </div>
                                 </div>
 

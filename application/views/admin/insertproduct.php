@@ -75,7 +75,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label>Upload Images</label>
-                                        <input type="file" class="form-control" required name="image[]" multiple="multiple" required>
+                                        <input type="file" class="form-control"  name="image[]" multiple="multiple" required>
                                     </div>
                                 </div>
                             </div>                             

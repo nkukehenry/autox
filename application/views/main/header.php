@@ -111,9 +111,9 @@ $data = $this->session->userdata();
                 </ul>
               </div> 
             </li>-->
-            <li class="nav-item">
+           <!--  <li class="nav-item">
               <a class="nav-link" href="#">About</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() . 'contact'; ?>">Contact</a>
             </li>
