@@ -380,4 +380,19 @@ if ($res === TRUE) {
 
         redirect('admin/', 'refresh');
     }
+
+    public function settings(){
+
+        $this->sidebarHeader();        
+        $this->load->view('admin/settings');
+        $this->footer();
+    }
+
+    public function save_settings(){
+
+      $this->adminmodel->save_settings($this->input->post());
+       
+      $this->session->set_flashdata('message',"Changes Saved successfully");
+      redirect('admin/settings', 'refresh');
+    }
 }

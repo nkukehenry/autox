@@ -98,6 +98,14 @@ $session_data = $this->session->userdata();
                         <p>Manage Users</p>
                     </a>
                 </li>
+
+                <li>
+                    <a href="<?php echo base_url('admin/settings');?>">
+                        <i class="pe-7s-settings"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
+
                 <li>
                     <a href="<?php echo base_url('admin/logout');?>">
                         <i class="pe-7s-back-2"></i>

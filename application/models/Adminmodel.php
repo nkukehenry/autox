@@ -129,4 +129,10 @@ if(!defined('BASEPATH'))
             $this->db->delete($this->products_images_table);
          }
 
+         public function save_settings($data){
+
+            $this->db->where('id',1);
+            $this->db->update('settings',$data);
+         }
+
     }
