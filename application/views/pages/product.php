@@ -123,7 +123,7 @@
             */ ?>
 
             <div>
-              <a href="tel:+256705596470"  class="btn btn-lg btn-outline-dark text-uppercase mt-5" id="addToCart"><i class="fa fa-call mr-2"></i>Call Us +256705596470</a>
+              <a href="tel:<?php echo settings()->phone_number; ?>"  class="btn btn-lg btn-outline-dark text-uppercase mt-5" id="addToCart"><i class="fa fa-call mr-2"></i>Call Us <?php echo settings()->phone_number; ?></a>
             </div>
           </form>
         </div>

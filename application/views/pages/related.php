@@ -23,7 +23,7 @@
 
          <div class="py-2">
             <p class="text-muted text-sm mb-1"><?=$product->pname?></p>
-            <h3 class="h6 text-uppercase mb-1"><a href="#" class="text-dark">+256706789876</a></h3>
+            <h3 class="h6 text-uppercase mb-1"><a href="tel:<?php echo settings()->phone_number; ?>" class="text-dark"><?php echo settings()->phone_number; ?></a></h3>
             <span class="text-muted"> 
               <?php if($product->price>0): ?>
                   UGX <?php echo number_format($product->price); ?>

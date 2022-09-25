@@ -14,11 +14,11 @@ $data = $this->session->userdata();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <meta name="title" content="AUTOXUG-Your trusted auto parts and accessories shopping center">
-  <meta name="description" content="Choose from a variety of quality auto supplies ready to help you pimp that ride.">
+   <meta name="title" content="<?php echo settings()->meta_title; ?>">
+  <meta name="description" content="<?php echo settings()->meta_description; ?>">
   <link rel="icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/logo.png">
-
-  <title>AUTOXUG-Your trusted auto parts and accessories shopping center</title>
+  <meta name="keywords" content="<?php echo settings()->meta_key_words; ?>">
+  <title><?php echo settings()->meta_title; ?></title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/bootstrap.css'; ?>">
@@ -59,7 +59,7 @@ $data = $this->session->userdata();
         <div class="row d-flex align-items-center">
           <div class="col-lg-12">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item mr-2"><i class="fas fa-headset"></i> Call/Whatsapp +256756287319</li>
+              <li class="list-inline-item mr-2"><i class="fas fa-headset"></i> Call/Whatsapp <?php echo settings()->phone_number; ?></li>
               <li class="list-inline-item border-left px-3 d-none d-sm-inline">Save your time, call or send a whatsapp.
             </ul>
           </div>
@@ -152,7 +152,7 @@ $data = $this->session->userdata();
             ?>
 
             <div class="nav-item">
-              <a href="tel:+256756287319" class="btn btn-dark text-white">CALL +256756287319</a>      
+              <a href="tel:+<?php echo settings()->phone_number; ?>" class="btn btn-dark text-white">CALL +<?php echo settings()->phone_number; ?></a>      
             </a>
             </div>
           </div>
