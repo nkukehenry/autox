@@ -17,8 +17,8 @@ class Product extends CI_Controller
         $data['current_product_id'] = $data['product']->pid;
         $this->load->view('main/header');
         $this->load->view('pages/product', $data);
-        $filter['']
-        $data['products'] = $this->products->allproducts();
+
+        $data['products'] = $this->products->allproducts([],12,0);
         $this->load->view('pages/related',$data);
 
         $this->load->view('main/footer');
