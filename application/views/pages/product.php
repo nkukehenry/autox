@@ -1,10 +1,5 @@
-<?php
 
 
-  $size = $product->size;
-  $sizeArr = explode(',', $size);
-
-  ?>
   <section class="mt-8" style="margin-top: 180px;background-color: #f2f2f2;">
     <div class="container">
       <ol class="breadcrumb justify-content-center">

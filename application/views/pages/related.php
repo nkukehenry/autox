@@ -8,7 +8,11 @@
     </div>
     <div class="row  mb-5 px-5">
      <!-- product -->
-     <?php foreach ($products as $product): ?>
+     <?php foreach ($products as $product):
+
+      if($product->pid !== $current_product_id ):
+
+      ?>
 
      <div class="item col-md-3 col-lg-3  col-sm-6 col-xs-12 box">
         <div class="product-image product-bg" style="background-image: url(<?php echo base_url() . 'assets/img/products/'. $product->images[0]->image; ?>);" onclick="('#<?=$product->pid?>').click();" >
@@ -35,7 +39,7 @@
 
        </div>
 
-     <?php endforeach; ?>
+     <?php endif; endforeach; ?>
    
    <!-- /product -->
         </div>
