@@ -20,7 +20,7 @@ class Product extends CI_Controller
 
         $page = mt_rand(0,1);
 
-        $data['products'] = shuffle($this->products->allproducts([],13,$page));
+        $data['products'] = $this->products->allproducts([],13,$page);
         $this->load->view('pages/related',$data);
 
         $this->load->view('main/footer');
