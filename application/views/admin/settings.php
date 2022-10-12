@@ -53,6 +53,20 @@
 
                                 <div class="col-md-12">
                                  <div class="form-group">
+                                    <label>Main Heading</label>
+                                    <textarea name="main_heading" placeholder="Main Heading" class="form-control"><?php echo $settings->main_heading; ?></textarea>
+                                </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label>Order Heading Prefix</label>
+                                    <textarea name="order_prefix" placeholder="Order Heading Prefix" class="form-control"><?php echo $settings->order_prefix; ?></textarea>
+                                </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                 <div class="form-group">
                                     <label>Google Analytics Script</label>
                                     <textarea name="analytics" placeholder="Google Analytics Script" class="form-control"><?php echo $settings->analytics; ?></textarea>
                                 </div>

@@ -81,11 +81,16 @@
                                 <div class="col-md-4">
                                     <img src="<?php echo base_url(); ?>assets/img/products/<?php echo $image->image; ?>" width="200px">
                                     <br>
-                                     <a href="#delete_image<?php echo $image->id; ?>" data-toggle="modal" class="text-danger">Remove</a>
+                                     <a href="#delete_image<?php echo $image->id; ?>" data-toggle="modal" class="btn btn-danger btn-sm">Remove</a>
+
+                                     <?php if($image->is_cover == 0): ?>
+                                     <a href="#mark_default<?php echo $image->id; ?>" data-toggle="modal" class="btn btn-primary btn-sm">Set As Cover</a>
+                                     <?php endif; ?>
                                 </div>
                                <?php
 
-                                include('includes/delete_image_modal.php');
+                                 include('includes/delete_image_modal.php');
+                                 include('includes/default_image_modal.php');
 
                                 endforeach; ?>
 

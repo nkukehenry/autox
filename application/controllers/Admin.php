@@ -133,7 +133,18 @@ class Admin extends CI_Controller
 
     public function productlist(){
 
-        $details['products'] = $this->adminmodel->getProducts();
+        $filters = $this->input->get();
+
+        $count   = $this->adminmodel->countProducts($filters);
+        $segment = 3;
+        $page    = ($this->uri->segment($segment))?$this->uri->segment($segment):0;
+        $perPage = (isset($filters['rows']))?$filters['rows']:15;
+
+        $details['search']   = (Object) $filters;
+        $details['categories'] = $this->adminmodel->get_categories();
+        $details['links']    = paginate('admin/productlist',$count, $perPage,$segment);
+        $details['products'] = $this->adminmodel->getProducts($filters,$perPage,$page);
+
         $this->sidebarHeader();        
         $this->load->view('admin/productlist', $details);
         $this->footer();
@@ -149,6 +160,14 @@ class Admin extends CI_Controller
         $id = $this->input->get('id');
         $pid = $this->input->get('pid');
         $this->adminmodel->deleteImage($id);
+        redirect('admin/edit_product/'.$pid, 'refresh');
+    }
+
+    public function setDefaultImage(){
+
+        $img_id = $this->input->get('img');
+        $pid = $this->input->get('pid');
+        $this->adminmodel->setDefaultImage($img_id,$pid);
         redirect('admin/edit_product/'.$pid, 'refresh');
     }
 
@@ -395,4 +414,25 @@ if ($res === TRUE) {
       $this->session->set_flashdata('message',"Changes Saved successfully");
       redirect('admin/settings', 'refresh');
     }
+
+    public function categories(){
+        $this->sidebarHeader(); 
+        $data['categories'] =   $this->adminmodel->get_categories();     
+        $this->load->view('admin/category_list',$data);
+        $this->footer();
+    }
+
+
+    public function saveCategory(){
+
+      $data = $this->input->post();
+
+      $res =  $this->adminmodel->insertCategory($data);
+
+      $message = "Operation successful";
+
+      $this->session->set_flashdata('message',$message);
+      redirect('admin/categories', 'refresh');
+    }
+
 }

@@ -20,9 +20,8 @@ $data = $this->session->userdata();
   <meta name="keywords" content="<?php echo settings()->meta_key_words; ?>">
   <title><?php echo settings()->meta_title; ?></title>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/bootstrap.css'; ?>">
-
+  <!-- Bootstrap core CSS     -->
+    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/bootstrap.css'; ?>">
   <!-- Price RangeBar CSS -->
   <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/nouislider.css'; ?>">
 
@@ -46,6 +45,40 @@ $data = $this->session->userdata();
   <script src="<?php echo base_url() . 'assets/js/popper.js'; ?>"></script>
   <script src="<?php echo base_url() . 'assets/js/bootstrap.js'; ?>"></script>
 
+  <style type="text/css">
+      .brand-centered {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+      }
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-left{
+
+          float: left!important;
+      }
+      .navbar-toggler,#navbarResponsive,.number{
+        z-index: 100;
+      }
+
+      @media (max-width: 768px) {
+              .hidden-xs{
+                display: none;
+       }
+       .navbar{
+        height: auto;
+       }
+   }
+
+   .pagination{display:inline-block;padding-left:0;margin:20px 0;border-radius:4px}.pagination>li{display:inline}.pagination>li>a,.pagination>li>span{position:relative;float:left;padding:6px 12px;margin-left:-1px;line-height:1.42857143;color:#337ab7;text-decoration:none;background-color:#fff;border:1px solid #ddd}.pagination>li:first-child>a,.pagination>li:first-child>span{margin-left:0;border-top-left-radius:4px;border-bottom-left-radius:4px}.pagination>li:last-child>a,.pagination>li:last-child>span{border-top-right-radius:4px;border-bottom-right-radius:4px}.pagination>li>a:focus,.pagination>li>a:hover,.pagination>li>span:focus,.pagination>li>span:hover{z-index:2;color:#23527c;background-color:#eee;border-color:#ddd}.pagination>.active>a,.pagination>.active>a:focus,.pagination>.active>a:hover,.pagination>.active>span,.pagination>.active>span:focus,.pagination>.active>span:hover{z-index:3;color:#fff;cursor:default;background-color:#337ab7;border-color:#337ab7}.pagination>.disabled>a,.pagination>.disabled>a:focus,.pagination>.disabled>a:hover,.pagination>.disabled>span,.pagination>.disabled>span:focus,.pagination>.disabled>span:hover{color:#777;cursor:not-allowed;background-color:#fff;border-color:#ddd}.pagination-lg>li>a,.pagination-lg>li>span{padding:10px 16px;font-size:18px;line-height:1.3333333}.pagination-lg>li:first-child>a,.pagination-lg>li:first-child>span{border-top-left-radius:6px;border-bottom-left-radius:6px}.pagination-lg>li:last-child>a,.pagination-lg>li:last-child>span{border-top-right-radius:6px;border-bottom-right-radius:6px}.pagination-sm>li>a,.pagination-sm>li>span{padding:5px 10px;font-size:12px;line-height:1.5}.pagination-sm>li:first-child>a,.pagination-sm>li:first-child>span{border-top-left-radius:3px;border-bottom-left-radius:3px}.pagination-sm>li:last-child>a,.pagination-sm>li:last-child>span{border-top-right-radius:3px;border-bottom-right-radius:3px}
+  </style>
+
 </head>
 
 <body>
@@ -67,95 +100,38 @@ $data = $this->session->userdata();
       </div>
     </div>
 
+
+
     <!-- Nav bar -->
-    <nav class="navbar navbar-expand-lg navbar-light navbar-airy fixed-top py-lg-2 px-lg-5 text-uppercase mb-2 bg-white" id="mainNav" data-toggle="affix" style="border-bottom: 2px orange solid;">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-airy fixed-top py-lg-3 px-lg-5 text-uppercase mb-2 bg-white" id="mainNav" data-toggle="affix" style="border-bottom: 2px orange solid;">
       <div class="container-fluid" id="main-navbar">
-        <a class="navbar-brand" href="<?php echo base_url(); ?>">
-          <img src="<?php echo base_url(); ?>assets/img/logo.png" width="90px">
-        </a>
+          <div class="brand-centered">
+          <a class="navbar-brand" href="<?php echo base_url(); ?>">
+            <img class="logo" src="<?php echo base_url(); ?>assets/img/logo.png" width="100px">
+          </a>
+         </div>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mx-auto">
+        <div class="collapse navbar-collapse  navbar-left" id="navbarResponsive">
+          <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url(); ?>">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() . 'products'; ?>">Products</a>
-             <!--  <div class="sub-menu">
-                <ul class="list-unstyled list-inline">
-                  <li><a href="<?php echo base_url() . 'category/women/ethnic'; ?>">Ethnic Wear</a></li>
-                  <li><a href="<?php echo base_url() . 'category/women/western'; ?>">Western Wear</a></li>
-                  <li><a href="<?php echo base_url() . 'category/women/formal'; ?>">Formal Wear</a></li>
-                  <li><a href="<?php echo base_url() . 'category/women/winter'; ?>">Winter Wear</a></li>
-                </ul>
-              </div> -->
-              <!-- <div class="dropdown">
-                  <a id="womenDropdown" href="#" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Women</a>
-                <ul aria-labelledby="womenDropdown" class="dropdown-menu">
-                <li class="dropdown-item">Ethnic Wear</li>
-                <li class="dropdown-item">Western Dress</li>
-                <li class="dropdown-item">Formal Dresses</li>
-                </ul>
-              </div> -->
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url() . 'shop/men'; ?>">Men</a>
-              <div class="sub-menu">
-                <ul class="list-unstyled list-inline">
-                  <li><a href="<?php echo base_url() . 'category/men/ethnic'; ?>">Ethnic Wear</a></li>
-                  <li><a href="<?php echo base_url() . 'category/men/formal'; ?>">Formal Wear</a></li>
-                  <li><a href="<?php echo base_url() . 'category/men/winter'; ?>">Winter Wear</a></li>
-                  <li><a href="<?php echo base_url() . 'category/men/western'; ?>">Western Wear</a></li>
-                </ul>
-              </div> 
-            </li>-->
-           <!--  <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li> -->
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() . 'contact'; ?>">Contact</a>
             </li>
           </ul>
-          <div class="d-flex align-items-center justify-content-between justify-content-lg-end mt-1 mb-2 my-lg-0">
-            <!-- Search Button-->
-            <!-- <div class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-search"></i></a> -->
-            <!-- <form><input type="search" class="form-control" name="search" placeholder="search" aria-label="Search"> </form> -->
-            <!-- </div> -->
 
-            <?php
-
-            /* if (isset($data['userID'])) {
-
-              echo ' <div class="nav-item dropdown"><a id="userdetails" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fas fa-user"></i>
-              </a>
-            <div aria-labelledby="userdetails" class="dropdown-menu dropdown-menu-right"> 
-              <a href="'.base_url('order/orderList').'" class="dropdown-item">Orders</a>
-               
-              <div class="dropdown-divider my-0"></div><a href="'.base_url('user/logout').'" class="dropdown-item">Logout</a>
-            </div>
-          </div>';
-            } else {
-              echo '
-                <div data-toggle="modal" data-target="#logModal" class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
-              </div>
-  ';
-            }
-            */
-
-            // <a href="#" class="dropdown-item">Addresses</a>
-            //    <a href="#" class="dropdown-item">Profile</a>
-
-            ?>
-
-            <div class="nav-item">
-              <a href="tel:+<?php echo settings()->phone_number; ?>" class="btn btn-dark text-white">CALL +<?php echo settings()->phone_number; ?></a>      
+          </div>
+           
+            <div class="pull-right hidden-xs hidden-sm number">
+              <a href="tel:+<?php echo settings()->phone_number; ?>" class="btn btn-dark text-white">CALL <?php echo settings()->phone_number; ?></a>      
             </a>
             </div>
-          </div>
         </div>
       </div>
     </nav>

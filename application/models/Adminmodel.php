@@ -43,12 +43,21 @@ if(!defined('BASEPATH'))
         }
 /////////////////////////////////////////-------------------------Products---------------------------/////////////////////////////////////////
 
-        public function getProducts(){
+        public function getProducts($filter=[],$limit=null,$start=0){
+
+             $this->applyFilter($filter);
+
+             if($limit){
+                $this->db->limit($limit,$start);
+             }
+
             $this->db->select('*');
+            $this->db->order_by('pid','desc');
             $this->db->from('product');
             $products =  $this->db->get()->result();
 
             foreach ($products as $product) {
+
                 $product->images   = $this->get_images($product->pid);
                 $product->category = $this->get_category($product->category);
             }
@@ -56,10 +65,30 @@ if(!defined('BASEPATH'))
             return $products;
         }
 
+        public function applyFilter($filter){
+
+            foreach($filter as $key=>$value){
+
+                if($value!=="" && $key !=="rows"){
+                        $this->db->like($key,$value);
+                }
+            }
+        }
+
+        public function countProducts($filter=[]){
+
+         $this->applyFilter($filter);
+         return count($this->db->get('product')->result());
+       }
+
+
         public function deleteProduct($id){
             $this->db->where('pid', $id);
             $this->db->delete('product');
 
+        }
+         public function get_categories(){
+            return $this->db->get($this->products_categories_table)->result();
         }
 
          public function get_category($id){
@@ -71,6 +100,7 @@ if(!defined('BASEPATH'))
         public function get_images($id){
 
             $this->db->where('product_id',$id);
+            $this->db->order_by('is_cover','desc');
             return $this->db->get($this->products_images_table)->result();
         }
 
@@ -86,6 +116,23 @@ if(!defined('BASEPATH'))
             }
 
             return $product;
+        }
+
+           public function insertCategory($data){
+
+           if(isset($data['id']) && is_numeric($data['id'])){
+
+                dd($data);
+                $this->db->where('id',$data['id']);
+                $this->db->update($this->products_categories_table,$data);
+
+            }else{
+                $this->db->insert($this->products_categories_table,$data);
+            }
+
+            $row_id = (isset($data['id']) && is_numeric($data['id']))?$data['id']:$this->db->insert_id();
+
+            return $this->get_category($row_id);
         }
 
 
@@ -133,6 +180,17 @@ if(!defined('BASEPATH'))
 
             $this->db->where('id',1);
             $this->db->update('settings',$data);
+         }
+
+         public function setDefaultImage($img_id,$pid){
+
+                //revoke current cover
+              $this->db->where('product_id',$pid)
+              ->update($this->products_images_table,['is_cover'=>0]);
+
+              //mark new cover
+              $this->db->where('id',$img_id)
+              ->update($this->products_images_table,['is_cover'=>1]);
          }
 
     }

@@ -3,18 +3,33 @@
   <div class="container">
     <div class="row">
     
-    <div class="py-5 mx-auto">
-        <h2 class="display-4 letter-spacing-5 text-center">Pimp your ride!</h2> 
+    <div class="py-5 mx-auto w-100">
+        <h2 class="display-4 letter-spacing-5 text-center"><?php echo settings()->main_heading; ?></h2> 
         <h3 class="display-6 letter-spacing-5 text-center" style="color:orange; font-weight: bold; text-decoration: none;">
-        Orders on <a href="tel:<?php echo settings()->phone_number; ?>"><?php echo settings()->phone_number; ?></a>
+           <?php echo settings()->order_prefix; ?> <a href="tel:<?php echo settings()->phone_number; ?>"><?php echo settings()->phone_number; ?></a>
       </h3> 
     </div>
-    <div class="row  mb-5 px-5">
+     
+    <div class="row  mb-5 px-5 w-100">
+      <form class="col-lg-12" action="<?php echo base_url(); ?>shop/index" method="get">
+         <div class="form-group col-md-12">
+          <input type="text" placeholder="Search" value="<?php echo @$search->pname;?>" name="pname" class="form-control" />
+        </div>
 
+         <?php if(count($products)==0): ?>
+          <h3 class="text-muted text-center w-100"> 
+            <i class="fa fa-info-circle"></i><br> 
+            No records found
+            <br>
+            <a href="<?php echo base_url(); ?>shop/index" class="btn btn-sm btn-dark text-white">Click here to show all </a>
+          </h3>
+         <?php endif; ?>
+
+      </form>
      <!-- product -->
      <?php foreach ($products as $product): ?>
 
-     <div class="item col-md-4 col-lg-3  col-sm-6 col-xs-12 box">
+     <div class="item col-md-4 col-lg-3  col-sm-6 col-xs-12 box" style="min-width: 200px;">
 
          <div class="product-image product-bg" style="background-image: url(<?php echo base_url() . 'assets/img/products/'. $product->images[0]->image; ?>);" >
          <div class="product-hover-overlay">
@@ -41,6 +56,8 @@
        </div>
 
      <?php endforeach; ?>
+
+     <?php echo $links; ?>
    
    <!-- /product -->
         </div>

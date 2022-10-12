@@ -11,7 +11,18 @@ class Shop extends CI_Controller {
 
 	public function index()
 	{
-		$data['products'] = $this->products->allproducts();
+       
+        $filters = $this->input->get();
+
+        $count   = $this->products->countProducts($filters);
+        $segment = 3;
+        $page    = ($this->uri->segment($segment))?$this->uri->segment($segment):0;
+        $perPage = 20;
+
+        $data['search']   = (Object) $filters;
+        $data['links']    = paginate('shop/index',$count, $perPage,$segment);
+        $data['products'] = $this->products->allproducts($filters,$perPage,$page);
+
 		$this->load->view('main/header');
 		$this->load->view('pages/products',$data);
 		$this->load->view('pages/men');

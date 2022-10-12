@@ -29,7 +29,7 @@
           <i class="fas fa-headset fa-3x"></i>
           </div>
           <div class="services">
-            <h6 class="text-uppercase">+<?php echo settings()->phone_number; ?></h6>
+            <h6 class="text-uppercase"><?php echo settings()->phone_number; ?></h6>
             <p class="text-muted">Prompt Customer Support</p>
           </div>  
         </div>

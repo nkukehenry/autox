@@ -13003,7 +13003,7 @@ a.text-gray-900:hover,a.text-gray-900:focus {
     }
 
     .navbar-expand-sm.navbar-sticky .navbar-collapse {
-        max-height: 80vh;
+        max-height: 100vh;
         overflow-y: auto
     }
 
@@ -13024,7 +13024,7 @@ a.text-gray-900:hover,a.text-gray-900:focus {
     }
 
     .navbar-expand-md.navbar-sticky .navbar-collapse {
-        max-height: 80vh;
+        max-height: 100vh;
         overflow-y: auto
     }
 
@@ -13045,7 +13045,7 @@ a.text-gray-900:hover,a.text-gray-900:focus {
     }
 
     .navbar-expand-lg.navbar-sticky .navbar-collapse {
-        max-height: 80vh;
+        max-height: 100vh;
         overflow-y: auto
     }
 
@@ -13066,7 +13066,7 @@ a.text-gray-900:hover,a.text-gray-900:focus {
     }
 
     .navbar-expand-xl.navbar-sticky .navbar-collapse {
-        max-height: 80vh;
+        max-height: 100vh;
         overflow-y: auto
     }
 
@@ -13086,7 +13086,7 @@ a.text-gray-900:hover,a.text-gray-900:focus {
 }
 
 .navbar-expand.navbar-sticky .navbar-collapse {
-    max-height: 80vh;
+    max-height: 100vh;
     overflow-y: auto
 }
 

@@ -28,7 +28,13 @@ if(!defined('BASEPATH'))
             
         }
 
-        function allproducts($gender=null){
+        function allproducts($filter=[],$limit=null,$start=0){
+
+             $this->applyFilter($filter);
+
+             if($limit){
+                $this->db->limit($limit,$start);
+             }
 
             $this->db->select('*');
             $this->db->from('product');
@@ -39,9 +45,26 @@ if(!defined('BASEPATH'))
                 $product->images   = $this->get_images($product->pid);
                 $product->category = $this->get_category($product->category);
             }
+
             return $products;
         
         }
+
+         public function applyFilter($filter){
+
+            foreach($filter as $key=>$value){
+
+                if($value!==""){
+                        $this->db->like($key,$value);
+                }
+            }
+        }
+
+         public function countProducts($filter=[]){
+
+         $this->applyFilter($filter);
+         return count($this->db->get('product')->result());
+       }
 
         function subCategory($gender){
             $this->db->distinct();
@@ -125,6 +148,7 @@ if(!defined('BASEPATH'))
         public function get_images($id){
 
             $this->db->where('product_id',$id);
+            $this->db->order_by('is_cover','desc');
             return $this->db->get($this->products_images_table)->result();
         }
 

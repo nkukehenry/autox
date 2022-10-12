@@ -67,6 +67,12 @@ $session_data = $this->session->userdata();
                     </a>
                 </li>
                 <li>
+                    <a href="<?php echo base_url('admin/categories');?>">
+                        <i class="pe-7s-menu"></i>
+                        <p>Manage Categories</p>
+                    </a>
+                </li>
+                <li>
                     <a href="<?php echo base_url('admin/productinsert');?>">
                         <i class="pe-7s-note"></i>
                         <p>Add Products</p>
