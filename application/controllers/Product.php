@@ -18,7 +18,9 @@ class Product extends CI_Controller
         $this->load->view('main/header');
         $this->load->view('pages/product', $data);
 
-        $data['products'] = $this->products->allproducts([],12,0);
+        $page = mt_rand(0,1);
+
+        $data['products'] = $this->products->allproducts([],13,$page);
         $this->load->view('pages/related',$data);
 
         $this->load->view('main/footer');
