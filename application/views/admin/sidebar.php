@@ -38,6 +38,14 @@ $session_data = $this->session->userdata();
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="<?php echo base_url().'assets_admin/css/pe-icon-7-stroke.css';?>" rel="stylesheet" />
+    <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.2.0/tinymce.min.js" 
+    ></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+        selector: '#textarea'});
+    </script>
 
 </head>
 <body>

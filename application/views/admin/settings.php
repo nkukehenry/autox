@@ -54,7 +54,7 @@
                                 <div class="col-md-12">
                                  <div class="form-group">
                                     <label>Main Heading</label>
-                                    <textarea name="main_heading" placeholder="Main Heading" class="form-control"><?php echo $settings->main_heading; ?></textarea>
+                                    <textarea id="textarea" name="main_heading" placeholder="Main Heading" class="form-control"><?php echo $settings->main_heading; ?></textarea>
                                 </div>
                                 </div>
 
