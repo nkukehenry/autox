@@ -118,5 +118,7 @@
  <!-- custom script  -->
  <script src="<?php echo base_url().'assets/js/creative.js'; ?>"></script>
 
+ <?php echo settings()->analytics; ?>
+
 </body>
 </html>
